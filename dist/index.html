@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <script type="text/javascript">
-    // runloop
+    // polyfill
     (function () {
       var lastTime = 0;
       var vendors = ['ms', 'moz', 'webkit', 'o'];
@@ -36,13 +36,13 @@
         };
     })();
   </script>
-  <script src="/dist/invasion.js"></script>
 </head>
 
 <body>
   <div id="container">
     <canvas id="game" width="320" height="480"></canvas>
   </div>
+  <script src="/dist/invasion.js"></script>
 </body>
 
 </html>

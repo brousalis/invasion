@@ -1,3 +1,5 @@
+import SpriteSheet from './SpriteSheet';
+
 var Sprite = function() {};
 
 Sprite.prototype.setup = function(sprite, props) {
