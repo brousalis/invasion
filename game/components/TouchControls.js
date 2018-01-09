@@ -1,7 +1,9 @@
-var TouchControls = function() {
-  var gutterWidth = 10;
-  var unitWidth = Game.width / 5;
-  var blockWidth = unitWidth - gutterWidth;
+import Game from './Game';
+
+const TouchControls = () => {
+  const gutterWidth = 10;
+  const unitWidth = Game.width / 5;
+  const blockWidth = unitWidth - gutterWidth;
 
   this.drawSquare = function(ctx, x, y, txt, on) {
     ctx.globalAlpha = on ? 0.9 : 0.6;
@@ -12,7 +14,7 @@ var TouchControls = function() {
     ctx.globalAlpha = 1.0;
     ctx.font = 'bold ' + 3 * unitWidth / 4 + 'px arial';
 
-    var txtSize = ctx.measureText(txt);
+    const txtSize = ctx.measureText(txt);
 
     ctx.fillText(txt, x + blockWidth / 2 - txtSize.width / 2, y + 3 * blockWidth / 4 + 5);
   };
@@ -20,7 +22,7 @@ var TouchControls = function() {
   this.draw = function(ctx) {
     ctx.save();
 
-    var yLoc = Game.height - unitWidth;
+    const yLoc = Game.height - unitWidth;
     this.drawSquare(ctx, gutterWidth, yLoc, '\u25C0', Game.keys['left']);
     this.drawSquare(ctx, unitWidth + gutterWidth, yLoc, '\u25B6', Game.keys['right']);
     this.drawSquare(ctx, 4 * unitWidth, yLoc, 'A', Game.keys['fire']);
@@ -31,12 +33,12 @@ var TouchControls = function() {
   this.step = function(dt) {};
 
   this.trackTouch = function(e) {
-    var touch, x;
+    const touch, x;
 
     e.preventDefault();
     Game.keys['left'] = false;
     Game.keys['right'] = false;
-    for (var i = 0; i < e.targetTouches.length; i++) {
+    for (let i = 0; i < e.targetTouches.length; i++) {
       touch = e.targetTouches[i];
       x = touch.pageX / Game.canvasMultiplier - Game.canvas.offsetLeft;
       if (x < unitWidth) {

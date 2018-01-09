@@ -1,7 +1,9 @@
 import Sprite from './Sprite';
+import PlayerMissile from './PlayerMissile';
+import Game from './Game';
 import c from '../consts';
 
-var PlayerShip = function() {
+const PlayerShip = function() {
   this.setup('ship', { vx: 0, reloadTime: 0.25, maxVel: 200 });
 
   this.reload = this.reloadTime;
@@ -41,7 +43,7 @@ PlayerShip.prototype.type = c.OBJECT_PLAYER;
 
 PlayerShip.prototype.hit = function(damage) {
   if (this.board.remove(this)) {
-    loseGame();
+    Game.loseGame();
   }
 };
 

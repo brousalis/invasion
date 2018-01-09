@@ -1,9 +1,10 @@
-import { enemies } from '../sprites';
+import Enemy from './Enemy';
 import c from '../consts';
+import enemies from '../enemies';
 
-var Level = function(levelData, callback) {
+const Level = function(levelData, callback) {
   this.levelData = [];
-  for (var i = 0; i < levelData.length; i++) {
+  for (let i = 0; i < levelData.length; i++) {
     this.levelData.push(Object.create(levelData[i]));
   }
   this.t = 0;
@@ -11,7 +12,7 @@ var Level = function(levelData, callback) {
 };
 
 Level.prototype.step = function(dt) {
-  var idx = 0,
+  let idx = 0,
     remove = [],
     curShip = null;
 
@@ -26,7 +27,7 @@ Level.prototype.step = function(dt) {
       remove.push(curShip);
     } else if (curShip[0] < this.t) {
       // Get the enemy definition blueprint
-      var enemy = enemies[curShip[3]],
+      const enemy = enemies[curShip[3]],
         override = curShip[4];
 
       // Add a new enemy with the blueprint and override
@@ -39,14 +40,14 @@ Level.prototype.step = function(dt) {
   }
 
   // Remove any objects from the levelData that have passed
-  for (var i = 0, len = remove.length; i < len; i++) {
-    var remIdx = this.levelData.indexOf(remove[i]);
+  for (let i = 0, len = remove.length; i < len; i++) {
+    const remIdx = this.levelData.indexOf(remove[i]);
     if (remIdx != -1) this.levelData.splice(remIdx, 1);
   }
 
   // If there are no more enemies on the board or in
   // levelData, this level is done
-  if (this.levelData.length === 0 && this.board.cnt[c.OBJECT_ENEMY] === 0) {
+  if (this.levelData.length === 0 && this.board.cnt[OBJECT_ENEMY] === 0) {
     if (this.callback) this.callback();
   }
 };

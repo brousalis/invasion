@@ -1,5 +1,5 @@
-var GameBoard = function() {
-  var board = this;
+const GameBoard = function() {
+  const board = this;
 
   // The current list of objects
   this.objects = [];
@@ -15,7 +15,7 @@ var GameBoard = function() {
 
   // Mark an object for removal
   this.remove = function(obj) {
-    var idx = this.removed.indexOf(obj);
+    const idx = this.removed.indexOf(obj);
     if (idx == -1) {
       this.removed.push(obj);
       return true;
@@ -31,8 +31,8 @@ var GameBoard = function() {
 
   // Removed an objects marked for removal from the list
   this.finalizeRemoved = function() {
-    for (var i = 0, len = this.removed.length; i < len; i++) {
-      var idx = this.objects.indexOf(this.removed[i]);
+    for (let i = 0, len = this.removed.length; i < len; i++) {
+      const idx = this.objects.indexOf(this.removed[i]);
       if (idx != -1) {
         this.cnt[this.removed[i].type]--;
         this.objects.splice(idx, 1);
@@ -42,16 +42,16 @@ var GameBoard = function() {
 
   // Call the same method on all current objects
   this.iterate = function(funcName) {
-    var args = Array.prototype.slice.call(arguments, 1);
-    for (var i = 0, len = this.objects.length; i < len; i++) {
-      var obj = this.objects[i];
+    const args = Array.prototype.slice.call(arguments, 1);
+    for (let i = 0, len = this.objects.length; i < len; i++) {
+      const obj = this.objects[i];
       obj[funcName].apply(obj, args);
     }
   };
 
   // Find the first object for which func is true
   this.detect = function(func) {
-    for (var i = 0, val = null, len = this.objects.length; i < len; i++) {
+    for (let i = 0, val = null, len = this.objects.length; i < len; i++) {
       if (func.call(this.objects[i])) return this.objects[i];
     }
     return false;
@@ -81,7 +81,7 @@ var GameBoard = function() {
   this.collide = function(obj, type) {
     return this.detect(function() {
       if (obj != this) {
-        var col = (!type || this.type & type) && board.overlap(obj, this);
+        const col = (!type || this.type & type) && board.overlap(obj, this);
         return col ? this : false;
       }
     });

@@ -1,7 +1,10 @@
-import c from '../consts';
+import Game from './Game';
 import Sprite from './Sprite';
+import EnemyMissile from './EnemyMissile';
+import Explosion from './Explosion';
+import c from '../consts';
 
-var Enemy = function(blueprint, override) {
+const Enemy = function(blueprint, override) {
   this.merge(this.baseParameters);
   this.setup(blueprint.sprite, blueprint);
   this.merge(override);
@@ -33,7 +36,7 @@ Enemy.prototype.step = function(dt) {
   this.x += this.vx * dt;
   this.y += this.vy * dt;
 
-  var collision = this.board.collide(this, c.OBJECT_PLAYER);
+  const collision = this.board.collide(this, c.OBJECT_PLAYER);
   if (collision) {
     collision.hit(this.damage);
     this.board.remove(this);

@@ -1,7 +1,7 @@
 import c from '../consts';
 import Sprite from './Sprite';
 
-var PlayerMissile = function(x, y) {
+const PlayerMissile = function(x, y) {
   this.setup('missile', { vy: -700, damage: 10 });
   this.x = x - this.w / 2;
   this.y = y - this.h;
@@ -12,7 +12,7 @@ PlayerMissile.prototype.type = c.OBJECT_PLAYER_PROJECTILE;
 
 PlayerMissile.prototype.step = function(dt) {
   this.y += this.vy * dt;
-  var collision = this.board.collide(this, c.OBJECT_ENEMY);
+  const collision = this.board.collide(this, c.OBJECT_ENEMY);
   if (collision) {
     collision.hit(this.damage);
     this.board.remove(this);

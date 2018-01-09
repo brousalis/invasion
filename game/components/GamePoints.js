@@ -1,15 +1,17 @@
-var GamePoints = function() {
+import Game from './Game';
+
+const GamePoints = function() {
   Game.points = 0;
 
-  var pointsLength = 8;
+  const pointsLength = 8;
 
-  this.draw = function(ctx) {
+  this.draw = ctx => {
     ctx.save();
     ctx.font = 'bold 18px arial';
     ctx.fillStyle = '#FFFFFF';
 
-    var txt = '' + Game.points;
-    var i = pointsLength - txt.length,
+    const txt = '' + Game.points;
+    let i = pointsLength - txt.length,
       zeros = '';
     while (i-- > 0) {
       zeros += '0';
@@ -19,7 +21,7 @@ var GamePoints = function() {
     ctx.restore();
   };
 
-  this.step = function(dt) {};
+  this.step = dt => {};
 };
 
 export default GamePoints;

@@ -1,6 +1,6 @@
 import SpriteSheet from './SpriteSheet';
 
-var Sprite = function() {};
+const Sprite = function() {};
 
 Sprite.prototype.setup = function(sprite, props) {
   this.sprite = sprite;
@@ -12,7 +12,7 @@ Sprite.prototype.setup = function(sprite, props) {
 
 Sprite.prototype.merge = function(props) {
   if (props) {
-    for (var prop in props) {
+    for (let prop in props) {
       this[prop] = props[prop];
     }
   }

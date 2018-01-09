@@ -4,16 +4,30 @@
 <head>
   <meta charset="UTF-8" />
   <title>G-Rally Invasion</title>
-  <link rel="stylesheet" href="./index.css" type="text/css" />
+  <style>
+    body {
+      background-color: black;
+    }
+
+    #container {
+      padding-top: 50px;
+      margin: 0 auto;
+      width: 480px;
+    }
+
+    canvas {
+      background-color: black;
+    }
+  </style>
   <meta name="viewport" content="width=device-width, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <script type="text/javascript">
     // polyfill
     (function () {
-      var lastTime = 0;
-      var vendors = ['ms', 'moz', 'webkit', 'o'];
-      for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+      const lastTime = 0;
+      const vendors = ['ms', 'moz', 'webkit', 'o'];
+      for (const x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
         window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
         window.cancelAnimationFrame =
           window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
@@ -21,9 +35,9 @@
 
       if (!window.requestAnimationFrame)
         window.requestAnimationFrame = function (callback, element) {
-          var currTime = new Date().getTime();
-          var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-          var id = window.setTimeout(function () {
+          const currTime = new Date().getTime();
+          const timeToCall = Math.max(0, 16 - (currTime - lastTime));
+          const id = window.setTimeout(function () {
             callback(currTime + timeToCall);
           }, timeToCall);
           lastTime = currTime + timeToCall;
