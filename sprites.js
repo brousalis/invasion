@@ -1,11 +1,3 @@
-export const CONSTS = {
-  OBJECT_PLAYER = 1,
-  OBJECT_PLAYER_PROJECTILE = 2,
-  OBJECT_ENEMY = 4,
-  OBJECT_ENEMY_PROJECTILE = 8,
-  OBJECT_POWERUP = 16
-}
-
 export const sprites = {
   ship: { sx: 0, sy: 0, w: 37, h: 42, frames: 1 },
   missile: { sx: 0, sy: 30, w: 2, h: 10, frames: 1 },

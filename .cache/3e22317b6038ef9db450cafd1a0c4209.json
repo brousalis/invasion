@@ -1,0 +1,1 @@
+{"dependencies":[],"generated":{"js":"\"use strict\";\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.default = {\n  OBJECT_PLAYER: 1,\n  OBJECT_PLAYER_PROJECTILE: 2,\n  OBJECT_ENEMY: 4,\n  OBJECT_ENEMY_PROJECTILE: 8,\n  OBJECT_POWERUP: 16\n};"},"hash":"e1808dc7cb0d7e654b7f22869d5879c2"}
