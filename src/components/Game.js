@@ -5,10 +5,13 @@ import PlayerShip from './PlayerShip';
 import Level from './Level';
 import GamePoints from './GamePoints';
 import TitleScreen from './TitleScreen';
+import TouchControls from './TouchControls';
 import Starfield from './Starfield';
 import sprites from '../sprites';
 
 const KEY_CODES = { 37: 'left', 39: 'right', 32: 'fire' };
+const GAME_WIDTH = 380;
+const GAME_HEIGHT = 480;
 
 let lastTime = new Date().getTime();
 let maxTime = 1 / 30;
@@ -27,13 +30,15 @@ const levelOne = [
 
 class Game {
   constructor() {
-    this.boards = [];
     this.keys = {};
+    this.boards = [];
+
     this.canvas = document.getElementById('game');
+    this.canvas.width = GAME_WIDTH;
+    this.canvas.height = GAME_HEIGHT;
 
     this.playerOffset = 10;
     this.canvasMultiplier = 1;
-    this.setupMobile();
 
     this.width = this.canvas.width;
     this.height = this.canvas.height;
@@ -44,6 +49,7 @@ class Game {
       return alert('Please upgrade your browser to play');
     }
 
+    this.setupMobile();
     this.setupInput();
 
     if (this.mobile) {
@@ -69,7 +75,7 @@ class Game {
 
   startGame() {
     this.setBoard(0, new Starfield(50, 0.6, 100, true));
-    this.setBoard(3, new TitleScreen('Gamut', 'Press fire to start', this.playGame));
+    this.setBoard(3, new TitleScreen('Gamut Invasion', 'Press fire to start', this.playGame));
   }
 
   playGame() {

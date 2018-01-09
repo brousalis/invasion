@@ -5,7 +5,9 @@
   <meta charset="UTF-8" />
   <title>G-Rally Invasion</title>
   <style>
-    body {
+    body,
+    canvas {
+      text-align: center;
       background-color: black;
     }
 
@@ -13,10 +15,6 @@
       padding-top: 50px;
       margin: 0 auto;
       width: 480px;
-    }
-
-    canvas {
-      background-color: black;
     }
   </style>
   <meta name="viewport" content="width=device-width, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
@@ -54,7 +52,7 @@
 
 <body>
   <div id='container'>
-    <canvas id='game' width='320' height='480'></canvas>
+    <canvas id='game'></canvas>
   </div>
   <script src="./index.js"></script>
 </body>

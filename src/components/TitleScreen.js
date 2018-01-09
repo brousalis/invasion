@@ -11,11 +11,11 @@ const TitleScreen = function TitleScreen(title, subtitle, callback) {
   this.draw = function(ctx) {
     ctx.fillStyle = '#FFFFFF';
 
-    ctx.font = 'bold 40px';
+    ctx.font = 'bold 40px Arial';
     const measure = ctx.measureText(title);
     ctx.fillText(title, Game.width / 2 - measure.width / 2, Game.height / 2);
 
-    ctx.font = 'bold 20px';
+    ctx.font = 'bold 20px Arial';
     const measure2 = ctx.measureText(subtitle);
     ctx.fillText(subtitle, Game.width / 2 - measure2.width / 2, Game.height / 2 + 40);
   };

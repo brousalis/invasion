@@ -3,9 +3,9 @@
   "author": "pete",
   "version": "0.0.1",
   "description": "some stupid thing",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "parcel index.html",
+    "start": "parcel index.html --open",
     "watch": "parcel watch index.html",
     "build": "parcel build index.html --public-url ./ --no-cache",
     "predeploy": "npm run build",
@@ -15,6 +15,9 @@
     "github-pages": "^3.0.2",
     "babel-preset-env": "^1.6.1",
     "parcel-bundler": "^1.4.1"
+  },
+  "babel": {
+    "presets": ["env"]
   },
   "github-pages": {
     "remote": {

@@ -1,6 +1,6 @@
 import Game from './Game';
 
-const TouchControls = () => {
+const TouchControls = function() {
   const gutterWidth = 10;
   const unitWidth = Game.width / 5;
   const blockWidth = unitWidth - gutterWidth;
@@ -33,7 +33,7 @@ const TouchControls = () => {
   this.step = function(dt) {};
 
   this.trackTouch = function(e) {
-    const touch, x;
+    let touch, x;
 
     e.preventDefault();
     Game.keys['left'] = false;
