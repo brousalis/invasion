@@ -3,14 +3,32 @@
   "author": "pete",
   "version": "0.0.1",
   "description": "some stupid thing",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "start": "parcel index.html",
     "watch": "parcel watch index.html",
-    "build": "parcel build index.html --out-dir docs"
+    "build": "parcel build index.html",
+    "predeploy": "npm run build",
+    "deploy": "github-pages"
   },
-  "dependencies": {
+  "devDependencies": {
+    "github-pages": "^3.0.2",
     "babel-preset-env": "^1.6.1",
     "parcel-bundler": "^1.4.1"
+  },
+  "github-pages": {
+    "remote": {
+      "user": "brousalis",
+      "repo": "invasion",
+      "ref": "heads/gh-pages"
+    },
+    "commit": {
+      "message": "deploy",
+      "author": {
+        "name": "Pete Brousalis",
+        "email": "brousapg@gmail.com"
+      }
+    },
+    "src": "./dist"
   }
 }
