@@ -7,7 +7,7 @@
   "scripts": {
     "start": "parcel index.html",
     "watch": "parcel watch index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --out-dir docs"
   },
   "dependencies": {
     "babel-preset-env": "^1.6.1",
