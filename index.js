@@ -134,7 +134,7 @@ var SpriteSheet = new function() {
     this.map = spriteData;
     this.image = new Image();
     this.image.onload = callback;
-    this.image.src = 'sprites.png';
+    this.image.src = require('../sprites.png');
   };
 
   this.draw = function(ctx, sprite, x, y, frame) {
@@ -519,9 +519,9 @@ var startGame = function() {
   if (ua.match(/android/)) {
     Game.setBoard(0, new Starfield(50, 0.6, 100, true));
   } else {
-    Game.setBoard(0, new Starfield(20, 0.4, 100, true));
-    Game.setBoard(1, new Starfield(50, 0.6, 100));
-    Game.setBoard(2, new Starfield(100, 1.0, 50));
+    Game.setBoard(0, new Starfield(20, 0.1, 100, true));
+    Game.setBoard(1, new Starfield(50, 0.3, 100));
+    Game.setBoard(2, new Starfield(100, 0.6, 50));
   }
   Game.setBoard(3, new TitleScreen('Alien Invasion', 'Press fire to start playing', playGame));
 };
