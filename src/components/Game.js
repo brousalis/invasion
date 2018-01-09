@@ -133,7 +133,7 @@ class Game {
   }
 
   setupMobile() {
-    const container = document.getElementById('container'),
+    let container = document.getElementById('container'),
       hasTouch = !!('ontouchstart' in window),
       w = window.innerWidth,
       h = window.innerHeight;

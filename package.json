@@ -7,7 +7,7 @@
   "scripts": {
     "start": "parcel index.html",
     "watch": "parcel watch index.html",
-    "build": "parcel build index.html",
+    "build": "parcel build index.html --public-url ./ --no-cache",
     "predeploy": "npm run build",
     "deploy": "github-pages"
   },
