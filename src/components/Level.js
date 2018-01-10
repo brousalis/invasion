@@ -47,7 +47,7 @@ Level.prototype.step = function(dt) {
 
   // If there are no more enemies on the board or in
   // levelData, this level is done
-  if (this.levelData.length === 0 && this.board.cnt[OBJECT_ENEMY] === 0) {
+  if (this.levelData.length === 0 && this.board.cnt[c.OBJECT_ENEMY] === 0) {
     if (this.callback) this.callback();
   }
 };
