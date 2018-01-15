@@ -37,6 +37,7 @@ Enemy.prototype.step = function(dt) {
   this.y += this.vy * dt;
 
   const collision = this.board.collide(this, c.OBJECT_PLAYER);
+
   if (collision) {
     collision.hit(this.damage);
     this.board.remove(this);
@@ -44,6 +45,7 @@ Enemy.prototype.step = function(dt) {
 
   if (Math.random() < 0.01 && this.reload <= 0) {
     this.reload = this.reloadTime;
+
     if (this.missiles == 2) {
       this.board.add(new EnemyMissile(this.x + this.w - 2, this.y + this.h));
       this.board.add(new EnemyMissile(this.x + 2, this.y + this.h));
@@ -51,6 +53,7 @@ Enemy.prototype.step = function(dt) {
       this.board.add(new EnemyMissile(this.x + this.w / 2, this.y + this.h));
     }
   }
+
   this.reload -= dt;
 
   if (this.y > Game.height || this.x < -this.w || this.x > Game.width) {
@@ -63,6 +66,12 @@ Enemy.prototype.hit = function(damage) {
   if (this.health <= 0) {
     if (this.board.remove(this)) {
       Game.points += this.points || 100;
+      var updates = {};
+      updates['/points/pete'] = Game.points;
+      firebase
+        .database()
+        .ref()
+        .update(updates);
       this.board.add(new Explosion(this.x + this.w / 2, this.y + this.h / 2));
     }
   }

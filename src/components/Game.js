@@ -7,6 +7,7 @@ import GamePoints from './GamePoints';
 import TitleScreen from './TitleScreen';
 import TouchControls from './TouchControls';
 import Starfield from './Starfield';
+import LogoScreen from './LogoScreen';
 import sprites from '../sprites';
 
 const KEY_CODES = { 37: 'left', 39: 'right', 32: 'fire' };
@@ -18,14 +19,19 @@ let maxTime = 1 / 30;
 
 const levelOne = [
   // Start,   End, Gap,  Type,   Override
-  [0, 4000, 500, 'step'],
-  [6000, 13000, 800, 'ltr'],
-  [10000, 16000, 400, 'circle'],
-  [17800, 20000, 500, 'straight', { x: 50 }],
-  [18200, 20000, 500, 'straight', { x: 90 }],
-  [18200, 20000, 500, 'straight', { x: 10 }],
-  [22000, 25000, 400, 'wiggle', { x: 150 }],
-  [22000, 25000, 400, 'wiggle', { x: 100 }],
+
+  [0, 1000, 230, 'straight', { x: 50 }],
+  [400, 1000, 230, 'straight', { x: 90 }],
+  [400, 1000, 230, 'straight', { x: 10 }],
+
+  // [0, 4000, 500, 'step'],
+  // [6000, 13000, 800, 'ltr'],
+  // [10000, 16000, 400, 'circle'],
+  // [17800, 20000, 500, 'straight', { x: 50 }],
+  // [18200, 20000, 500, 'straight', { x: 90 }],
+  // [18200, 20000, 500, 'straight', { x: 10 }],
+  // [22000, 25000, 400, 'wiggle', { x: 150 }],
+  // [22000, 25000, 400, 'wiggle', { x: 100 }],
 ];
 
 class Game {
@@ -49,7 +55,6 @@ class Game {
       return alert('Please upgrade your browser to play');
     }
 
-    this.setupMobile();
     this.setupInput();
 
     if (this.mobile) {
@@ -62,6 +67,8 @@ class Game {
     this.startGame = this.startGame.bind(this);
     this.playGame = this.playGame.bind(this);
     this.loseGame = this.loseGame.bind(this);
+    this.winGame = this.winGame.bind(this);
+    this.helpGame = this.helpGame.bind(this);
 
     this.loop();
 
@@ -74,8 +81,14 @@ class Game {
   }
 
   startGame() {
-    this.setBoard(0, new Starfield(50, 0.6, 100, true));
-    this.setBoard(3, new TitleScreen('Gamut Invasion', 'Press fire to start', this.playGame));
+    this.setBoard(0, new Starfield(50, 0.2, 100, true));
+    this.setBoard(1, new Starfield(20, 0.1, 100));
+    this.setBoard(2, new Starfield(70, 0.4, 100));
+    this.setBoard(3, new LogoScreen(this.helpGame));
+  }
+
+  helpGame() {
+    this.setBoard(3, new TitleScreen('Shoot the ships to win!', 'Press fire to start', 20, this.playGame));
   }
 
   playGame() {

@@ -1,6 +1,6 @@
 import Game from './Game';
 
-const TitleScreen = function TitleScreen(title, subtitle, callback) {
+function TitleScreen(title, subtitle, size = 40, callback) {
   let up = false;
 
   this.step = function(dt) {
@@ -11,7 +11,7 @@ const TitleScreen = function TitleScreen(title, subtitle, callback) {
   this.draw = function(ctx) {
     ctx.fillStyle = '#FFFFFF';
 
-    ctx.font = 'bold 40px Arial';
+    ctx.font = `bold ${size}px Arial`;
     const measure = ctx.measureText(title);
     ctx.fillText(title, Game.width / 2 - measure.width / 2, Game.height / 2);
 
@@ -19,6 +19,6 @@ const TitleScreen = function TitleScreen(title, subtitle, callback) {
     const measure2 = ctx.measureText(subtitle);
     ctx.fillText(subtitle, Game.width / 2 - measure2.width / 2, Game.height / 2 + 40);
   };
-};
+}
 
 export default TitleScreen;

@@ -4,10 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <title>G-Rally Invasion</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <style>
     body,
     canvas {
       text-align: center;
+
       background-color: black;
     }
 
@@ -16,10 +18,72 @@
       margin: 0 auto;
       width: 480px;
     }
+
+    #name {
+      background: black;
+      color: white;
+      border: none;
+      position: absolute;
+      top: 280px;
+      left: 50%;
+      width: 175px;
+      margin-left: -87px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    *:focus {
+      outline: none
+    }
+
+    #play {
+      background: #e04c2c;
+      font-family: 'Roboto', sans-serif;
+      color: white;
+      text-align: center;
+      padding: 8px 12px;
+      width: 150px;
+      border: none;
+      border-radius: 3px;
+      text-transform: uppercase;
+      font-size: 20px;
+      letter-spacing: 1px;
+      top: -200px;
+      position: relative;
+      z-index: 100;
+
+    }
   </style>
   <meta name="viewport" content="width=device-width, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+  <script>
+    var config = {
+      apiKey: "AIzaSyCoTQpDqnKUPwlc_5RU8tL7rrSLR_8irMo",
+      authDomain: "grally-14e44.firebaseapp.com",
+      databaseURL: "https://grally-14e44.firebaseio.com",
+      projectId: "grally-14e44",
+      storageBucket: "",
+      messagingSenderId: "1003942569228"
+    };
+    firebase.initializeApp(config);
+  </script>
+
+</head>
+
+<body>
+  <div id='container'>
+    <canvas id='game'></canvas>
+  </div>
+
+  <div id="user">
+    <img id="image" src="./src/logo.png" style="display:none" />
+    <input autofocus id="name" type="text" placeholder="enter your name" />
+    <button id="play">play</button>
+  </div>
+
   <script type="text/javascript">
     // polyfill
     (function () {
@@ -47,13 +111,16 @@
           clearTimeout(id);
         };
     })();
+    // name
+    document.getElementById('name').oninput = function (event) {
+      window.name = event.data
+    };
+    // play button 
+    document.getElementById('play').onclick = function (event) {
+      window.play = true
+      document.getElementById('user').style = "display:none";
+    };
   </script>
-</head>
-
-<body>
-  <div id='container'>
-    <canvas id='game'></canvas>
-  </div>
   <script src="./index.js"></script>
 </body>
 

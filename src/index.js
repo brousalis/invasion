@@ -1,3 +1,9 @@
-window.addEventListener('load', () => {
-  require('./components/Game');
-});
+const initializeGame = () => {
+  window.addEventListener('load', () => {
+    require('./components/Game');
+  });
+};
+
+initializeGame();
+
+module.exports = initializeGame;

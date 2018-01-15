@@ -6,7 +6,7 @@ const SpriteSheet = new function() {
     this.image = new Image();
     this.image.onload = callback;
     this.image.src = require('../sprites.png');
-    document.body.appendChild(this.image);
+    // document.body.appendChild(this.image);
   };
 
   this.draw = function(ctx, sprite, x, y, frame) {
