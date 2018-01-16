@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>G-Rally Invasion</title>
+  <style>
+    body {
+      text-align: center;
+      background-color: black;
+    }
+
+    #container {
+      padding-top: 50px;
+      margin: 0 auto;
+      width: 480px;
+    }
+
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    .score {
+      font-family: monospace;
+      font-size: 36px;
+      padding: 8px 15px;
+    }
+
+    .score div {
+      float: left;
+    }
+
+    .score span {
+      float: right;
+      font-weight: bold;
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    var config = {
+      apiKey: "AIzaSyCoTQpDqnKUPwlc_5RU8tL7rrSLR_8irMo",
+      authDomain: "grally-14e44.firebaseapp.com",
+      databaseURL: "https://grally-14e44.firebaseio.com",
+      projectId: "grally-14e44",
+      storageBucket: "",
+      messagingSenderId: "1003942569228"
+    };
+    firebase.initializeApp(config);
+  </script>
+
+</head>
+
+<body>
+  <div id='container'>
+    <div id="scoreboard" style="background: white">
+    </div>
+    <div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    jQuery.fn.sortDivs = function sortDivs() {
+      $("> div", this[0]).sort(dec_sort).appendTo(this[0]);
+      function dec_sort(a, b) { return ($(b).data("sort")) >= ($(a).data("sort")) ? 1 : -1; }
+    }
+
+    function addScore(name, score) {
+      $('#scoreboard').append(' <div class="score clearfix" data-sort="' + score + '"> <div>' + name + '</div><span>' + score + '</span> </div> ');
+    }
+
+    const pointsRef = firebase.database().ref('points');
+    pointsRef.on('child_changed', function (snapshot) {
+      console.log('changed', snapshot.key, snapshot.val())
+      $('#scoreboard').sortDivs();
+    });
+
+
+    const topRef = firebase.database().ref('points').orderByChild('value');
+    topRef.on('child_added', function (snapshot) {
+      console.log('added', snapshot.key, snapshot.val())
+      addScore(snapshot.key, snapshot.val())
+      $('#scoreboard').sortDivs();
+    })
+  </script>
+</body>
+
+</html>

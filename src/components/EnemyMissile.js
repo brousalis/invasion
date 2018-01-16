@@ -14,8 +14,8 @@ EnemyMissile.prototype.type = c.OBJECT_ENEMY_PROJECTILE;
 EnemyMissile.prototype.step = function(dt) {
   this.y += this.vy * dt;
 
-  this.frame++;
-  if (this.frame === 2) this.frame = 0;
+  // this.frame++;
+  // if (this.frame === 2) this.frame = 0;
 
   const collision = this.board.collide(this, c.OBJECT_PLAYER);
 

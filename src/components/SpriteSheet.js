@@ -5,7 +5,7 @@ const SpriteSheet = new function() {
     this.map = spriteData;
     this.image = new Image();
     this.image.onload = callback;
-    this.image.src = require('../sprites.png');
+    this.image.src = require('../images/sprites.png');
     // document.body.appendChild(this.image);
   };
 

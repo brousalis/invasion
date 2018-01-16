@@ -23,6 +23,7 @@ Enemy.prototype.baseParameters = {
   G: 0,
   H: 0,
   t: 0,
+  boss: false,
   reloadTime: 0.75,
   reload: 0,
 };
@@ -43,14 +44,23 @@ Enemy.prototype.step = function(dt) {
     this.board.remove(this);
   }
 
-  if (Math.random() < 0.01 && this.reload <= 0) {
-    this.reload = this.reloadTime;
+  let missile = 'enemy_missile';
 
-    if (this.missiles == 2) {
-      this.board.add(new EnemyMissile(this.x + this.w - 2, this.y + this.h));
-      this.board.add(new EnemyMissile(this.x + 2, this.y + this.h));
-    } else {
-      this.board.add(new EnemyMissile(this.x + this.w / 2, this.y + this.h));
+  if (this.boss) missile = 'enemy_package';
+
+  if (this.boss) {
+    this.board.add(new EnemyMissile(this.x + this.w + 20, this.y + this.h, missile));
+    this.board.add(new EnemyMissile(this.x - 20, this.y + this.h, missile));
+  } else {
+    if (Math.random() < 0.01 && this.reload <= 0) {
+      this.reload = this.reloadTime;
+
+      if (this.missiles === 2) {
+        this.board.add(new EnemyMissile(this.x + this.w - 2, this.y + this.h, missile));
+        this.board.add(new EnemyMissile(this.x + 2, this.y + this.h, missile));
+      } else {
+        this.board.add(new EnemyMissile(this.x + this.w / 2, this.y + this.h, missile));
+      }
     }
   }
 
@@ -66,12 +76,7 @@ Enemy.prototype.hit = function(damage) {
   if (this.health <= 0) {
     if (this.board.remove(this)) {
       Game.points += this.points || 100;
-      var updates = {};
-      updates['/points/pete'] = Game.points;
-      firebase
-        .database()
-        .ref()
-        .update(updates);
+
       this.board.add(new Explosion(this.x + this.w / 2, this.y + this.h / 2));
     }
   }

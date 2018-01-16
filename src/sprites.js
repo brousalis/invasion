@@ -1,7 +1,7 @@
 export default {
-  ship: { sx: 0, sy: 0, w: 37, h: 42, frames: 1 },
+  ship: { sx: 0, sy: 0, w: 37, h: 41, frames: 1 },
   missile: { sx: 0, sy: 30, w: 2, h: 10, frames: 1 },
-  enemy_missile: { sx: 9, sy: 42, w: 3, h: 20, frames: 1 },
+  enemy_missile: { sx: 15, sy: 42, w: 13, h: 26, frames: 1 },
   enemy_package: { sx: 0, sy: 126, w: 25, h: 40, frames: 2 },
   explosion: { sx: 0, sy: 64, w: 64, h: 64, frames: 12 },
 

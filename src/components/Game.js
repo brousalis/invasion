@@ -39,6 +39,7 @@ class Game {
     }
 
     this.setupInput();
+    this.setupMobile();
 
     if (this.mobile) {
       this.setBoard(4, new TouchControls());
@@ -58,7 +59,6 @@ class Game {
     SpriteSheet.load(sprites, this.startGame);
   }
 
-  // Change an active game board
   setBoard(num, board) {
     this.boards[num] = board;
   }
@@ -85,10 +85,22 @@ class Game {
 
   winGame() {
     this.setBoard(3, new TitleScreen('You win!', 'Press fire to play again', 40, this.playGame));
+    var updates = {};
+    updates['/points/' + window.name] = this.points;
+    firebase
+      .database()
+      .ref()
+      .update(updates);
   }
 
   loseGame() {
     this.setBoard(3, new TitleScreen('You lose!', 'Press fire to play again', 40, this.playGame));
+    var updates = {};
+    updates['/points/' + window.name] = this.points;
+    firebase
+      .database()
+      .ref()
+      .update(updates);
   }
 
   setupInput() {
@@ -116,7 +128,6 @@ class Game {
     );
   }
 
-  // Game Loop
   loop() {
     const curTime = new Date().getTime();
     requestAnimationFrame(this.loop);

@@ -5,8 +5,6 @@ import enemies from '../enemies';
 const levelOne = [
   // Start,   End, Gap,  Type,   Override
 
-  // [0, 100, 500, 'boss', { x: 90 }],
-
   [0, 2000, 500, 'peteStraight', { x: 190 }],
   [4000, 6000, 500, 'peteStraight', { x: 50 }],
   [8000, 12000, 500, 'ltr'],
@@ -28,7 +26,9 @@ const levelOne = [
   // mcmaster
   [42000, 45000, 400, 'wiggle', { x: 150 }],
   [42000, 45000, 400, 'wiggle', { x: 100 }],
-  [45000, 48000, 800, 'ltr', { x: 210 }],
+  // [45000, 48000, 800, 'ltr', { x: 210 }],
+
+  [55000, 55100, 100, 'boss', { x: 160 }],
 ];
 
 function Level(callback) {
