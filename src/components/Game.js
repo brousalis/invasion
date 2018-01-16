@@ -5,111 +5,49 @@ import PlayerShip from './PlayerShip';
 import Level from './Level';
 import GamePoints from './GamePoints';
 import TitleScreen from './TitleScreen';
-import TouchControls from './TouchControls';
 import Starfield from './Starfield';
 import LogoScreen from './LogoScreen';
-import sprites from '../sprites';
 
-const KEY_CODES = { 37: 'left', 39: 'right', 32: 'fire' };
-const GAME_WIDTH = 380;
-const GAME_HEIGHT = 480;
+const Game = new function() {
+  const boards = [];
 
-let lastTime = new Date().getTime();
-let maxTime = 1 / 30;
-
-class Game {
-  constructor() {
-    this.keys = {};
-    this.boards = [];
-
-    this.canvas = document.getElementById('game');
-    this.canvas.width = GAME_WIDTH;
-    this.canvas.height = GAME_HEIGHT;
+  // Game Initialization
+  this.initialize = function(canvasElementId, sprite_data, callback) {
+    this.canvas = document.getElementById(canvasElementId);
 
     this.playerOffset = 10;
     this.canvasMultiplier = 1;
+    this.setupMobile();
 
     this.width = this.canvas.width;
     this.height = this.canvas.height;
 
     this.ctx = this.canvas.getContext && this.canvas.getContext('2d');
-
     if (!this.ctx) {
       return alert('Please upgrade your browser to play');
     }
 
     this.setupInput();
-    this.setupMobile();
+
+    this.loop();
 
     if (this.mobile) {
       this.setBoard(4, new TouchControls());
     }
 
-    this.loop = this.loop.bind(this);
-    this.setBoard = this.setBoard.bind(this);
-    this.setupInput = this.setupInput.bind(this);
-    this.startGame = this.startGame.bind(this);
-    this.playGame = this.playGame.bind(this);
-    this.loseGame = this.loseGame.bind(this);
-    this.winGame = this.winGame.bind(this);
-    this.helpGame = this.helpGame.bind(this);
+    SpriteSheet.load(sprite_data, callback);
+  };
 
-    this.loop();
+  // Handle Input
+  const KEY_CODES = { 37: 'left', 39: 'right', 32: 'fire' };
+  this.keys = {};
 
-    SpriteSheet.load(sprites, this.startGame);
-  }
-
-  setBoard(num, board) {
-    this.boards[num] = board;
-  }
-
-  startGame() {
-    this.setBoard(0, new Starfield(50, 0.2, 100, true));
-    this.setBoard(1, new Starfield(20, 0.1, 100));
-    this.setBoard(2, new Starfield(70, 0.4, 100));
-    this.setBoard(3, new LogoScreen(this.helpGame));
-  }
-
-  helpGame() {
-    this.setBoard(3, new TitleScreen('Shoot the ships to win!', 'Press fire to start', 20, this.playGame));
-  }
-
-  playGame() {
-    const board = new GameBoard();
-    board.add(new PlayerShip());
-    board.add(new Level(this.winGame));
-
-    this.setBoard(3, board);
-    this.setBoard(5, new GamePoints(0));
-  }
-
-  winGame() {
-    this.setBoard(3, new TitleScreen('You win!', 'Press fire to play again', 40, this.playGame));
-    var updates = {};
-    updates['/points/' + window.name] = this.points;
-    firebase
-      .database()
-      .ref()
-      .update(updates);
-  }
-
-  loseGame() {
-    this.setBoard(3, new TitleScreen('You lose!', 'Press fire to play again', 40, this.playGame));
-    var updates = {};
-    updates['/points/' + window.name] = this.points;
-    firebase
-      .database()
-      .ref()
-      .update(updates);
-  }
-
-  setupInput() {
-    const game = this;
+  this.setupInput = function() {
     window.addEventListener(
       'keydown',
-      e => {
+      function(e) {
         if (KEY_CODES[e.keyCode]) {
-          this.keys[KEY_CODES[e.keyCode]] = true;
+          Game.keys[KEY_CODES[e.keyCode]] = true;
           e.preventDefault();
         }
       },
@@ -118,35 +56,43 @@ class Game {
 
     window.addEventListener(
       'keyup',
-      e => {
+      function(e) {
         if (KEY_CODES[e.keyCode]) {
-          this.keys[KEY_CODES[e.keyCode]] = false;
+          Game.keys[KEY_CODES[e.keyCode]] = false;
           e.preventDefault();
         }
       },
       false
     );
-  }
+  };
 
-  loop() {
+  let lastTime = new Date().getTime();
+  const maxTime = 1 / 30;
+  // Game Loop
+  this.loop = function() {
     const curTime = new Date().getTime();
-    requestAnimationFrame(this.loop);
-    let dt = (curTime - lastTime) / 1000;
+    requestAnimationFrame(Game.loop);
+    var dt = (curTime - lastTime) / 1000;
     if (dt > maxTime) {
       dt = maxTime;
     }
 
-    for (let i = 0, len = this.boards.length; i < len; i++) {
-      if (this.boards[i]) {
-        this.boards[i].step(dt);
-        this.boards[i].draw(this.ctx);
+    for (var i = 0, len = boards.length; i < len; i++) {
+      if (boards[i]) {
+        boards[i].step(dt);
+        boards[i].draw(Game.ctx);
       }
     }
     lastTime = curTime;
-  }
+  };
 
-  setupMobile() {
-    let container = document.getElementById('container'),
+  // Change an active game board
+  this.setBoard = function(num, board) {
+    boards[num] = board;
+  };
+
+  this.setupMobile = function() {
+    var container = document.getElementById('container'),
       hasTouch = !!('ontouchstart' in window),
       w = window.innerWidth,
       h = window.innerHeight;
@@ -187,7 +133,91 @@ class Game {
     this.canvas.style.position = 'absolute';
     this.canvas.style.left = '0px';
     this.canvas.style.top = '0px';
-  }
-}
+  };
+}();
 
-export default new Game();
+const TouchControls = function() {
+  var gutterWidth = 10;
+  var unitWidth = Game.width / 5;
+  var blockWidth = unitWidth - gutterWidth;
+
+  this.drawSquare = function(ctx, x, y, txt, on, center = false) {
+    ctx.globalAlpha = on ? 0.9 : 0.6;
+    ctx.fillStyle = '#444';
+    ctx.fillRect(x, y, blockWidth, blockWidth);
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#FFF';
+    ctx.globalAlpha = 0.8;
+    ctx.font = 'bold ' + 3 * unitWidth / 4 + 'px arial';
+
+    const txtSize = ctx.measureText(txt);
+    const yLoc = center ? y + 3 * blockWidth / 4 + 1 : y + 3 * blockWidth / 4 + 5;
+
+    ctx.fillText(txt, x + blockWidth / 2 - txtSize.width / 2, yLoc);
+  };
+
+  this.draw = function(ctx) {
+    ctx.save();
+
+    const yLoc = Game.height - unitWidth;
+    this.drawSquare(ctx, gutterWidth, yLoc, '\u25C0', Game.keys['left']);
+    this.drawSquare(ctx, unitWidth + gutterWidth, yLoc, '\u25B6', Game.keys['right']);
+    this.drawSquare(ctx, 4 * unitWidth, yLoc, '\u25CF', Game.keys['fire'], true);
+
+    ctx.restore();
+  };
+
+  this.step = function(dt) {};
+
+  this.trackTouch = function(e) {
+    var touch, x;
+
+    e.preventDefault();
+    Game.keys['left'] = false;
+    Game.keys['right'] = false;
+    for (var i = 0; i < e.targetTouches.length; i++) {
+      touch = e.targetTouches[i];
+      x = touch.pageX / Game.canvasMultiplier - Game.canvas.offsetLeft;
+      if (x < unitWidth) {
+        Game.keys['left'] = true;
+      }
+      if (x > unitWidth && x < 2 * unitWidth) {
+        Game.keys['right'] = true;
+      }
+    }
+
+    if (e.type == 'touchstart' || e.type == 'touchend') {
+      for (i = 0; i < e.changedTouches.length; i++) {
+        touch = e.changedTouches[i];
+        x = touch.pageX / Game.canvasMultiplier - Game.canvas.offsetLeft;
+        if (x > 4 * unitWidth) {
+          Game.keys['fire'] = e.type == 'touchstart';
+        }
+      }
+    }
+  };
+
+  Game.canvas.addEventListener('touchstart', this.trackTouch, true);
+  Game.canvas.addEventListener('touchmove', this.trackTouch, true);
+  Game.canvas.addEventListener('touchend', this.trackTouch, true);
+
+  // For Android
+  Game.canvas.addEventListener(
+    'dblclick',
+    function(e) {
+      e.preventDefault();
+    },
+    true
+  );
+  Game.canvas.addEventListener(
+    'click',
+    function(e) {
+      e.preventDefault();
+    },
+    true
+  );
+
+  Game.playerOffset = unitWidth + 20;
+};
+
+export default Game;

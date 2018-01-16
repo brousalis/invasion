@@ -2,60 +2,14 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
   <title>G-Rally Invasion</title>
-  <style>
-    body,
-    canvas {
-      text-align: center;
-      background-color: black;
-    }
-
-    #container {
-      padding-top: 50px;
-      margin: 0 auto;
-      width: 480px;
-    }
-
-    #name {
-      background: black;
-      color: white;
-      border: none;
-      position: absolute;
-      top: 280px;
-      left: 50%;
-      width: 175px;
-      margin-left: -87px;
-      font-size: 24px;
-      text-align: center;
-    }
-
-    *:focus {
-      outline: none
-    }
-
-    #play {
-      background: #e04c2c;
-      cursor: pointer;
-      color: white;
-      text-align: center;
-      padding: 8px 12px;
-      width: 150px;
-      border: none;
-      border-radius: 3px;
-      text-transform: uppercase;
-      font-size: 20px;
-      letter-spacing: 1px;
-      top: -200px;
-      position: relative;
-      z-index: 100;
-    }
-  </style>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+  <link rel="stylesheet" href="index.css" type="text/css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
   <script>
     var config = {
       apiKey: "AIzaSyCoTQpDqnKUPwlc_5RU8tL7rrSLR_8irMo",
@@ -73,16 +27,17 @@
 <body>
   <div id='container'>
     <canvas id='game'></canvas>
-
-    <div>
-      <a href="./scoreboard.html">scoreboard</a>
-    </div>
   </div>
 
   <div id="user">
     <img id="image" src="./src/images/logo.png" style="display:none" />
-    <input autofocus id="name" type="text" placeholder="enter your name" />
-    <button id="play">play</button>
+    <form id="form">
+      <input autofocus id="name" type="text" placeholder="enter your name" />
+      <button id="play">play</button>
+    </form>
+    <div style="display:none">
+      <a href="./scoreboard.html">scoreboard</a>
+    </div>
   </div>
 
   <script type="text/javascript">
@@ -114,14 +69,20 @@
     })();
 
     // name
-    document.getElementById('name').oninput = function (event) {
-      window.name = event.target.value
-    };
-    // play button 
-    document.getElementById('play').onclick = function (event) {
-      window.play = true
-      document.getElementById('user').style = "display:none";
-    };
+    $(function () {
+      console.log('loaded');
+      $('#name').on('input', function (event) {
+        window.name = event.target.value
+      });
+      $('#form').submit(function (event) {
+        event.preventDefault();
+        console.log(event);
+        if ($('#name').val() === '') return;
+        $('#user').hide();
+        window.play = true;
+      });
+    });
+
   </script>
   <script src="./index.js"></script>
 </body>

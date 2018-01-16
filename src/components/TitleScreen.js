@@ -1,6 +1,6 @@
 import Game from './Game';
 
-function TitleScreen(title, subtitle, size = 40, callback) {
+function TitleScreen(title, subtitle, size = 10, callback) {
   let up = false;
 
   this.step = function(dt) {
@@ -11,17 +11,33 @@ function TitleScreen(title, subtitle, size = 40, callback) {
       callback();
     }
   };
+  const wrapText = (context, text, x, y, maxWidth, lineHeight) => {
+    var words = text.split(' ');
+    var line = '';
 
+    for (var n = 0; n < words.length; n++) {
+      var testLine = line + words[n] + ' ';
+      var metrics = context.measureText(testLine);
+      var testWidth = metrics.width;
+      if (testWidth > maxWidth && n > 0) {
+        context.fillText(line, x, y);
+        line = words[n] + ' ';
+        y += lineHeight;
+      } else {
+        line = testLine;
+      }
+    }
+    context.fillText(line, x, y);
+  };
   this.draw = function(ctx) {
     ctx.fillStyle = '#FFFFFF';
+    ctx.textAlign = 'center';
 
     ctx.font = `bold ${size}px Arial`;
-    const measure = ctx.measureText(title);
-    ctx.fillText(title, Game.width / 2 - measure.width / 2, Game.height / 2);
+    wrapText(ctx, title, Game.width / 2, Game.height / 2, Game.width - 20, 25);
 
-    ctx.font = 'bold 20px Arial';
-    const measure2 = ctx.measureText(subtitle);
-    ctx.fillText(subtitle, Game.width / 2 - measure2.width / 2, Game.height / 2 + 40);
+    ctx.font = 'bold 10px Arial';
+    ctx.fillText(subtitle, Game.width / 2, Game.height / 2 + 40);
   };
 }
 

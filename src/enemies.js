@@ -36,7 +36,6 @@ export default {
     B: 75,
     C: 1,
     E: 100,
-    missiles: 2,
   },
   circle: {
     x: 250,

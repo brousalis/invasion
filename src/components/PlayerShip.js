@@ -3,9 +3,10 @@ import PlayerMissile from './PlayerMissile';
 import Game from './Game';
 import c from '../consts';
 
-const PlayerShip = function() {
+const PlayerShip = function(loseGame) {
   this.setup('ship', { vx: 0, reloadTime: 0.25, maxVel: 200 });
 
+  this.loseGame = loseGame;
   this.reload = this.reloadTime;
   this.x = Game.width / 2 - this.w / 2;
   this.y = Game.height - Game.playerOffset - this.h;
@@ -43,7 +44,8 @@ PlayerShip.prototype.type = c.OBJECT_PLAYER;
 
 PlayerShip.prototype.hit = function(damage) {
   if (this.board.remove(this)) {
-    Game.loseGame();
+    console.log(this);
+    this.loseGame();
   }
 };
 
