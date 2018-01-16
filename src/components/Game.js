@@ -119,16 +119,16 @@ const Game = new function() {
     container.style.width = w + 'px';
     container.style.padding = 0;
 
-    if (h >= this.canvas.height * 1.75 || w >= this.canvas.height * 1.75) {
-      this.canvasMultiplier = 2;
-      this.canvas.width = w / 2;
-      this.canvas.height = h / 2;
-      this.canvas.style.width = w + 'px';
-      this.canvas.style.height = h + 'px';
-    } else {
-      this.canvas.width = w;
-      this.canvas.height = h;
-    }
+    // if (h >= this.canvas.height * 1.75 || w >= this.canvas.height * 1.75) {
+    this.canvasMultiplier = 1.5;
+    this.canvas.width = w / 1.5;
+    this.canvas.height = h / 1.5;
+    this.canvas.style.width = w + 'px';
+    this.canvas.style.height = h + 'px';
+    // } else {
+    // this.canvas.width = w;
+    // this.canvas.height = h;
+    // }
 
     this.canvas.style.position = 'absolute';
     this.canvas.style.left = '0px';
