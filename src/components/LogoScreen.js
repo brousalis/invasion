@@ -1,11 +1,8 @@
 import Game from './Game';
 
 function LogoScreen(callback) {
-  let up = false;
-
   this.step = function(dt) {
     if (window.play === true) {
-      console.log('caklll');
       callback();
     }
   };

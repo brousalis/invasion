@@ -4,8 +4,12 @@ function TitleScreen(title, subtitle, size = 40, callback) {
   let up = false;
 
   this.step = function(dt) {
-    if (!Game.keys['fire']) up = true;
-    if (up && Game.keys['fire'] && callback) callback();
+    if (!Game.keys['fire']) {
+      up = true;
+    }
+    if (up && Game.keys['fire'] && callback) {
+      callback();
+    }
   };
 
   this.draw = function(ctx) {

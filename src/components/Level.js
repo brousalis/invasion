@@ -2,14 +2,44 @@ import Enemy from './Enemy';
 import c from '../consts';
 import enemies from '../enemies';
 
-const Level = function(levelData, callback) {
+const levelOne = [
+  // Start,   End, Gap,  Type,   Override
+
+  // [0, 100, 500, 'boss', { x: 90 }],
+
+  [0, 2000, 500, 'peteStraight', { x: 190 }],
+  [4000, 6000, 500, 'peteStraight', { x: 50 }],
+  [8000, 12000, 500, 'ltr'],
+
+  // gomez snake
+  [15000, 18000, 400, 'step'],
+  [18000, 23000, 400, 'circle'],
+
+  // sap ship
+  [21800, 22800, 300, 'straight', { x: 50 }],
+  [22000, 23000, 300, 'straight', { x: 90 }],
+  [22000, 23000, 300, 'straight', { x: 10 }],
+
+  // sap ship
+  [28800, 29800, 300, 'straight', { x: 250 }],
+  [29000, 30000, 300, 'straight', { x: 290 }],
+  [29000, 30000, 300, 'straight', { x: 210 }],
+
+  // mcmaster
+  [42000, 45000, 400, 'wiggle', { x: 150 }],
+  [42000, 45000, 400, 'wiggle', { x: 100 }],
+  [45000, 48000, 800, 'ltr', { x: 210 }],
+];
+
+function Level(callback) {
+  const levelData = levelOne;
   this.levelData = [];
   for (let i = 0; i < levelData.length; i++) {
     this.levelData.push(Object.create(levelData[i]));
   }
   this.t = 0;
   this.callback = callback;
-};
+}
 
 Level.prototype.step = function(dt) {
   let idx = 0,

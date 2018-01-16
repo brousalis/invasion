@@ -1,8 +1,24 @@
 export default {
+  boss: {
+    x: 0,
+    y: -50,
+    sprite: 'enemy_boss',
+    health: 200,
+    E: 50,
+    B: 150,
+    C: 4,
+  },
   straight: {
     x: 0,
     y: -50,
     sprite: 'enemy_sap',
+    health: 10,
+    E: 100,
+  },
+  peteStraight: {
+    x: 0,
+    y: -50,
+    sprite: 'enemy_pete',
     health: 10,
     E: 100,
   },

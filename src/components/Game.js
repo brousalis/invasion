@@ -17,23 +17,6 @@ const GAME_HEIGHT = 480;
 let lastTime = new Date().getTime();
 let maxTime = 1 / 30;
 
-const levelOne = [
-  // Start,   End, Gap,  Type,   Override
-
-  [0, 1000, 230, 'straight', { x: 50 }],
-  [400, 1000, 230, 'straight', { x: 90 }],
-  [400, 1000, 230, 'straight', { x: 10 }],
-
-  // [0, 4000, 500, 'step'],
-  // [6000, 13000, 800, 'ltr'],
-  // [10000, 16000, 400, 'circle'],
-  // [17800, 20000, 500, 'straight', { x: 50 }],
-  // [18200, 20000, 500, 'straight', { x: 90 }],
-  // [18200, 20000, 500, 'straight', { x: 10 }],
-  // [22000, 25000, 400, 'wiggle', { x: 150 }],
-  // [22000, 25000, 400, 'wiggle', { x: 100 }],
-];
-
 class Game {
   constructor() {
     this.keys = {};
@@ -94,18 +77,18 @@ class Game {
   playGame() {
     const board = new GameBoard();
     board.add(new PlayerShip());
-    board.add(new Level(levelOne, this.winGame));
+    board.add(new Level(this.winGame));
 
     this.setBoard(3, board);
     this.setBoard(5, new GamePoints(0));
   }
 
   winGame() {
-    this.setBoard(3, new TitleScreen('You win!', 'Press fire to play again', this.playGame));
+    this.setBoard(3, new TitleScreen('You win!', 'Press fire to play again', 40, this.playGame));
   }
 
   loseGame() {
-    this.setBoard(3, new TitleScreen('You lose!', 'Press fire to play again', this.playGame));
+    this.setBoard(3, new TitleScreen('You lose!', 'Press fire to play again', 40, this.playGame));
   }
 
   setupInput() {
