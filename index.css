@@ -127,8 +127,17 @@ table {
   border-spacing: 0;
 }
 
+body,
 canvas {
   background-color: black;
+}
+
+#container {
+  margin: 0 auto;
+  width: 480px;
+  padding-top: 50px;
+  position: relative;
+  text-align: center;
 }
 
 #name {
@@ -160,9 +169,7 @@ canvas {
   text-transform: uppercase;
   font-size: 20px;
   letter-spacing: 1px;
-  left: 50%;
-  margin-left: -75px;
-  top: -200px;
+  top: -150px;
   position: relative;
   z-index: 100;
 }
