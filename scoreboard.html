@@ -25,8 +25,8 @@
 
     .score {
       font-family: monospace;
-      font-size: 36px;
-      padding: 8px 15px;
+      font-size: 28px;
+      padding: 5px 15px;
     }
 
     .score:nth-child(even) {
@@ -88,7 +88,7 @@
     }
 
     function addScore(name, score, winner) {
-      $('#scoreboard').append(' <div class="score ' + (winner ? 'winner ' : '') + 'clearfix" data-name="' + name + '" data-sort="' + score + '"> <div>' + name + '</div><span>' + score + '<div>' + (!winner && '&#9760;') + '</div></span> </div> ');
+      $('#scoreboard').append(' <div class="score ' + (winner ? 'winner ' : '') + 'clearfix" data-name="' + name + '" data-sort="' + score + '"> <div>' + name + '</div><span>' + score + '<div>' + (winner ? '&#9760;' : '') + '</div></span> </div> ');
     }
 
     const pointsRef = firebase.database().ref('points');
