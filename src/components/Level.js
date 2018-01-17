@@ -6,12 +6,12 @@ const levelOne = [
   // Start,   End, Gap,  Type,   Override
 
   [0, 2000, 500, 'peteStraight', { x: 190 }],
-  [4000, 6000, 500, 'mackeyStraight', { x: 30 }],
-  [8000, 10000, 500, 'mharStraight', { x: 150 }],
+  [4006, 6000, 500, 'mackeyStraight', { x: 20 }],
+  [8000, 10000, 500, 'mharStraight', { x: 180 }],
   // [8000, 1200, 500, 'ltr'],
 
   // gomez snake
-  [14000, 17000, 400, 'step'],
+  [13500, 17000, 400, 'step'],
 
   // dan
   [21000, 23500, 500, 'ltr'],
@@ -27,22 +27,23 @@ const levelOne = [
   [30000, 31000, 300, 'sap', { x: 120 }],
 
   // mcmaster
-  [34000, 36000, 400, 'wiggle', { x: 120 }],
-  [34000, 36000, 400, 'wiggle', { x: 70 }],
-
-  // rich
-  // add rich left
-  [40000, 44000, 800, 'rich', { x: 90 }],
-  // add righ right
+  [34000, 36500, 400, 'wiggle', { x: 120 }],
+  [34000, 36500, 400, 'wiggle', { x: 70 }],
 
   // gomez circle
-  [43000, 50000, 400, 'circle'],
+  [42000, 50000, 400, 'circle'],
 
-  // add mackey
-  // add mhar
+  // horizontal part
+  [60000, 60100, 400, 'rich', { x: -50, y: 120 }],
+  [60000, 60100, 400, 'richMed', { x: -50, y: 20 }],
+  [60000, 60100, 400, 'richFast', { x: -50, y: 70 }],
+
+  [66000, 66100, 400, 'mackeyStraight', { x: 190 }],
+  [66000, 66100, 400, 'rich'],
+  [68000, 68100, 400, 'mharStraight'],
 
   // amazon boss
-  [64000, 64100, 100, 'boss', { x: 90 }],
+  [75000, 75100, 100, 'boss', { x: 90 }],
 ];
 
 function Level(callback) {

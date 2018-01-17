@@ -143,10 +143,10 @@ const TouchControls = function() {
 
   this.drawSquare = function(ctx, x, y, txt, on, center = false) {
     ctx.globalAlpha = on ? 0.9 : 0.6;
-    ctx.fillStyle = '#444';
+    ctx.fillStyle = '#444444';
     ctx.fillRect(x, y, blockWidth, blockWidth);
     ctx.textAlign = 'left';
-    ctx.fillStyle = '#FFF';
+    ctx.fillStyle = '#ffffff';
     ctx.globalAlpha = 0.8;
     ctx.font = 'bold ' + 3 * unitWidth / 4 + 'px arial';
 

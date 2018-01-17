@@ -1,6 +1,6 @@
 import Game from './Game';
 
-function TitleScreen(title, subtitle, size = 10, callback) {
+function TitleScreen(title, subtitle, size = 15, callback) {
   let up = false;
 
   this.step = function(dt) {
@@ -34,10 +34,10 @@ function TitleScreen(title, subtitle, size = 10, callback) {
     ctx.textAlign = 'center';
 
     ctx.font = `bold ${size}px Arial`;
-    wrapText(ctx, title, Game.width / 2, Game.height / 2, Game.width - 20, 25);
+    wrapText(ctx, title, Game.width / 2, Game.height / 2 - 50, Game.width - 40, 25);
 
-    ctx.font = 'bold 10px Arial';
-    ctx.fillText(subtitle, Game.width / 2, Game.height / 2 + 40);
+    ctx.font = 'bold 12px Arial';
+    ctx.fillText(subtitle, Game.width / 2, Game.height / 2 + 30);
   };
 }
 

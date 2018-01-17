@@ -46,7 +46,7 @@ Enemy.prototype.step = function(dt) {
 
   let missile = 'enemy_missile';
 
-  if (this.boss) missile = 'enemy_package';
+  if (this.boss || this.package) missile = 'enemy_package';
 
   if (this.boss) {
     this.board.add(new EnemyMissile(this.x + this.w + 20, this.y + this.h, missile));

@@ -18,7 +18,7 @@ const startGame = () => {
 };
 
 const helpGame = () => {
-  Game.setBoard(3, new TitleScreen('Shoot the ships to win!', 'Press fire to start', 20, playGame));
+  Game.setBoard(3, new TitleScreen('Shoot all the ships to win!', 'Press fire to start', 24, playGame));
 };
 
 const playGame = () => {
@@ -31,7 +31,7 @@ const playGame = () => {
 };
 
 const winGame = () => {
-  Game.setBoard(3, new TitleScreen('You win!', 'Press fire to play again', 40, playGame));
+  Game.setBoard(3, new TitleScreen('You win!', 'Press fire to play again', 30, playGame));
   var updates = {};
   updates['/points/' + window.name] = Game.points;
   firebase
@@ -41,7 +41,7 @@ const winGame = () => {
 };
 
 const loseGame = () => {
-  Game.setBoard(3, new TitleScreen('You lose!', 'Press fire to play again', 40, playGame));
+  Game.setBoard(3, new TitleScreen('You lose!', 'Press fire to play again', 30, playGame));
   var updates = {};
   updates['/points/' + window.name] = Game.points;
   firebase

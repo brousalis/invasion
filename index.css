@@ -140,17 +140,31 @@ canvas {
   text-align: center;
 }
 
-#name {
-  background: black;
-  color: white;
-  border: none;
+#form {
   position: absolute;
-  top: 300px;
+  top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 100px;
+}
+
+#name {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  color: white;
+  display: block;
+  border: none;
+  border-radius: 4px;
   width: 175px;
-  margin-left: -87px;
   font-size: 24px;
   text-align: center;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 769px) {
+  #form {
+    margin-top: 50px;
+  }
 }
 
 *:focus {
@@ -162,14 +176,11 @@ canvas {
   cursor: pointer;
   color: white;
   text-align: center;
-  padding: 8px 12px;
+  padding: 15px 12px;
   width: 150px;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
   text-transform: uppercase;
   font-size: 20px;
   letter-spacing: 1px;
-  top: -150px;
-  position: relative;
-  z-index: 100;
 }

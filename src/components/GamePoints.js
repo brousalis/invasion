@@ -3,7 +3,7 @@ import Game from './Game';
 const GamePoints = function() {
   Game.points = 0;
 
-  const pointsLength = 8;
+  const pointsLength = 6;
 
   this.draw = ctx => {
     ctx.save();
@@ -17,7 +17,7 @@ const GamePoints = function() {
       zeros += '0';
     }
 
-    ctx.fillText(zeros + txt, 10, 20);
+    ctx.fillText(zeros + txt, 35, 20);
     ctx.restore();
   };
 
