@@ -76,7 +76,7 @@ export default {
     health: 10,
     B: 75,
     C: 1,
-    E: 80,
+    E: 90,
   },
   circle: {
     x: 210,

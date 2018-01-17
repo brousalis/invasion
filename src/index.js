@@ -32,22 +32,33 @@ const playGame = () => {
 
 const winGame = () => {
   Game.setBoard(3, new TitleScreen('You win!', 'Press fire to play again', 30, playGame));
-  var updates = {};
-  updates['/points/' + window.name] = Game.points;
-  firebase
-    .database()
-    .ref()
-    .update(updates);
+  saveScore({ winner: true });
 };
 
 const loseGame = () => {
   Game.setBoard(3, new TitleScreen('You lose!', 'Press fire to play again', 30, playGame));
-  var updates = {};
-  updates['/points/' + window.name] = Game.points;
+  saveScore({ winner: false });
+};
+
+const saveScore = data => {
+  const updates = {};
+  const url = '/points/' + window.name;
   firebase
     .database()
-    .ref()
-    .update(updates);
+    .ref(url)
+    .once('value')
+    .then(function(snapshot) {
+      const record = snapshot.val();
+      let points = 0;
+      if (record) points = record.points;
+      if (window.name && Game.points > points) {
+        updates[url] = Object.assign(data, { points: Game.points });
+        firebase
+          .database()
+          .ref()
+          .update(updates);
+      }
+    });
 };
 
 window.addEventListener('load', () => {

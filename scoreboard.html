@@ -7,13 +7,14 @@
   <style>
     body {
       text-align: center;
+      margin: 0;
       background-color: black;
     }
 
     #container {
-      padding-top: 50px;
+      padding-top: 10px;
       margin: 0 auto;
-      width: 480px;
+      width: calc(100% - 40px);
     }
 
     .clearfix::after {
@@ -35,6 +36,18 @@
     .score span {
       float: right;
       font-weight: bold;
+    }
+
+    .winner {
+      background: green;
+      color: white;
+    }
+
+    h1 {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-family: monospace;
+      font-size: 36px;
     }
   </style>
   <meta name="viewport" content="width=device-width, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
@@ -59,6 +72,8 @@
 <body>
   <div id='container'>
     <div id="scoreboard" style="background: white">
+      <img src="./src/images/logo.png" />
+      <h1>HIGH SCORES</h1>
     </div>
   </div>
 
@@ -68,21 +83,25 @@
       function dec_sort(a, b) { return ($(b).data("sort")) >= ($(a).data("sort")) ? 1 : -1; }
     }
 
-    function addScore(name, score) {
-      $('#scoreboard').append(' <div class="score clearfix" data-sort="' + score + '"> <div>' + name + '</div><span>' + score + '</span> </div> ');
+    function addScore(name, score, winner) {
+      $('#scoreboard').append(' <div class="score ' + (winner ? 'winner ' : '') + 'clearfix" data-name="' + name + '" data-sort="' + score + '"> <div>' + name + '</div><span>' + score + '</span> </div> ');
     }
 
     const pointsRef = firebase.database().ref('points');
     pointsRef.on('child_changed', function (snapshot) {
       console.log('changed', snapshot.key, snapshot.val())
+      const record = snapshot.val();
+      const name = snapshot.key;
+      $('.score[data-name=' + name + ']').remove();
+      addScore(name, record.points, record.winner)
       $('#scoreboard').sortDivs();
     });
-
 
     const topRef = firebase.database().ref('points').orderByChild('value');
     topRef.on('child_added', function (snapshot) {
       console.log('added', snapshot.key, snapshot.val())
-      addScore(snapshot.key, snapshot.val())
+      const record = snapshot.val();
+      addScore(snapshot.key, record.points, record.winner)
       $('#scoreboard').sortDivs();
     })
   </script>
