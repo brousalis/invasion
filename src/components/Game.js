@@ -120,9 +120,9 @@ const Game = new function() {
     container.style.padding = 0;
 
     // if (h >= this.canvas.height * 1.75 || w >= this.canvas.height * 1.75) {
-    this.canvasMultiplier = 1.5;
-    this.canvas.width = w / 1.5;
-    this.canvas.height = h / 1.5;
+    this.canvasMultiplier = 1.2;
+    this.canvas.width = w / 1.2;
+    this.canvas.height = h / 1.2;
     this.canvas.style.width = w + 'px';
     this.canvas.style.height = h + 'px';
     // } else {
