@@ -1,13 +1,14 @@
 import Game from './Game';
 
-function TitleScreen(title, subtitle, size = 15, callback) {
+function TitleScreen(title, subtitle, size = 15, callback, fire = true) {
   let up = false;
 
   this.step = function(dt) {
-    if (!Game.keys['fire']) {
+    const shouldContinue = fire ? Game.keys['fire'] : Game.keys['enter'];
+    if (!shouldContinue) {
       up = true;
     }
-    if (up && Game.keys['fire'] && callback) {
+    if (up && shouldContinue && callback) {
       callback();
     }
   };

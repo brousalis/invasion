@@ -39,7 +39,7 @@ const Game = new function() {
   };
 
   // Handle Input
-  const KEY_CODES = { 37: 'left', 39: 'right', 32: 'fire' };
+  const KEY_CODES = { 37: 'left', 39: 'right', 32: 'fire', 13: 'enter' };
   this.keys = {};
 
   this.setupInput = function() {

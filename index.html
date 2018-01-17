@@ -28,14 +28,18 @@
   <div id='container'>
     <canvas id='game' width="320" height="480"></canvas>
     <div id="user">
-      <form id="form">
+      <div id="form">
         <input autofocus id="name" type="text" placeholder="enter your name" />
         <button id="play">play</button>
-      </form>
+      </div>
+
       <div style="display:none">
         <img id="image" src="./src/images/logo.png" />
       </div>
       <a id="score" href="./scoreboard.html">scoreboard</a>
+    </div>
+    <div id="lost" style="display:none">
+      <button id="lost-button">play again</button>
     </div>
   </div>
 
@@ -73,7 +77,7 @@
       $('#name').on('input', function (event) {
         window.name = event.target.value
       });
-      $('#form').submit(function (event) {
+      $('#play').click(function (event) {
         event.preventDefault();
         if ($('#name').val() === '') return;
         $('#user').hide();

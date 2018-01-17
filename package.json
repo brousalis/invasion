@@ -22,8 +22,8 @@
   "github-pages": {
     "remote": {
       "user": "brousalis",
-      "repo": "invasion",
-      "ref": "heads/gh-pages"
+      "repo": "brousalis.github.io",
+      "ref": "heads/master"
     },
     "commit": {
       "message": "deploy",

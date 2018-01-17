@@ -185,6 +185,24 @@ canvas {
   letter-spacing: 1px;
 }
 
+#lost-button {
+  background: #e04c2c;
+  cursor: pointer;
+  color: white;
+  text-align: center;
+  padding: 15px 12px;
+  width: 150px;
+  border: none;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-size: 20px;
+  letter-spacing: 1px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 #score {
   color: black;
 }

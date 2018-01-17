@@ -18,10 +18,15 @@ const startGame = () => {
 };
 
 const helpGame = () => {
-  Game.setBoard(3, new TitleScreen('Shoot all the ships to win!', 'Press fire to start', 24, playGame));
+  Game.setBoard(
+    3,
+    new TitleScreen('Shoot all the enemies to win!', 'Press fire to start (bottom right)', 24, playGame)
+  );
 };
 
 const playGame = () => {
+  window.lost = false;
+  $('#lost').hide();
   const board = new GameBoard();
   board.add(new PlayerShip(loseGame));
   board.add(new Level(winGame));
@@ -31,12 +36,14 @@ const playGame = () => {
 };
 
 const winGame = () => {
-  Game.setBoard(3, new TitleScreen('You win!', 'Press fire to play again', 30, playGame));
+  Game.setBoard(3, new TitleScreen('You win!', '', 30, playGame));
   saveScore({ winner: true });
 };
 
 const loseGame = () => {
-  Game.setBoard(3, new TitleScreen('You lose!', 'Press fire to play again', 30, playGame));
+  Game.setBoard(3, new TitleScreen('You lose!', '', 30, playGame, false));
+  window.lost = true;
+  $('#lost').show();
   saveScore({ winner: false });
 };
 
@@ -61,6 +68,7 @@ const saveScore = data => {
     });
 };
 
-window.addEventListener('load', () => {
+$(function() {
   Game.initialize('game', sprites, startGame);
+  $('#lost-button').click(playGame);
 });
