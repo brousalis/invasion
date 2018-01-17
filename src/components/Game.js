@@ -151,7 +151,7 @@ const TouchControls = function() {
     ctx.font = 'bold ' + 3 * unitWidth / 4 + 'px arial';
 
     const txtSize = ctx.measureText(txt);
-    const yLoc = center ? y + 3 * blockWidth / 4 + 1 : y + 3 * blockWidth / 4 + 5;
+    const yLoc = y + 3 * blockWidth / 4 + 1;
 
     ctx.fillText(txt, x + blockWidth / 2 - txtSize.width / 2, yLoc);
   };
@@ -160,8 +160,8 @@ const TouchControls = function() {
     ctx.save();
 
     const yLoc = Game.height - unitWidth;
-    this.drawSquare(ctx, gutterWidth, yLoc, '\u25C0', Game.keys['left']);
-    this.drawSquare(ctx, unitWidth + gutterWidth, yLoc, '\u25B6', Game.keys['right']);
+    this.drawSquare(ctx, gutterWidth, yLoc, '\u2190', Game.keys['left']);
+    this.drawSquare(ctx, unitWidth + gutterWidth, yLoc, '\u2192', Game.keys['right']);
     this.drawSquare(ctx, 4 * unitWidth, yLoc, '\u25CF', Game.keys['fire'], true);
 
     ctx.restore();
