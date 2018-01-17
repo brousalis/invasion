@@ -109,6 +109,6 @@ export default {
     B: 150,
     C: 1.2,
     E: 55,
-    missiles: 2,
+    missiles: 1,
   },
 };
