@@ -184,3 +184,7 @@ canvas {
   font-size: 20px;
   letter-spacing: 1px;
 }
+
+#score {
+  color: black;
+}

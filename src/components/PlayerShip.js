@@ -43,10 +43,9 @@ PlayerShip.prototype = new Sprite();
 PlayerShip.prototype.type = c.OBJECT_PLAYER;
 
 PlayerShip.prototype.hit = function(damage) {
-  // if (this.board.remove(this)) {
-  // console.log(this);
-  // this.loseGame();
-  // }
+  if (this.board.remove(this)) {
+    this.loseGame();
+  }
 };
 
 export default PlayerShip;
