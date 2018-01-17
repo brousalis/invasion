@@ -52,6 +52,7 @@
       font-weight: bold;
       font-family: monospace;
       font-size: 36px;
+      margin: 0;
     }
   </style>
   <meta name="viewport" content="width=device-width, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
@@ -88,7 +89,7 @@
     }
 
     function addScore(name, score, winner) {
-      $('#scoreboard').append(' <div class="score ' + (winner ? 'winner ' : '') + 'clearfix" data-name="' + name + '" data-sort="' + score + '"> <div>' + name + '</div><span>' + score + '<div>' + (winner ? '&#9760;' : '') + '</div></span> </div> ');
+      $('#scoreboard').append(' <div class="score ' + (winner ? 'winner ' : '') + 'clearfix" data-name="' + name + '" data-sort="' + score + '"> <div>' + name + '</div><span>' + score + '<div>' + (!winner ? '&#9760;' : '&#127881') + '</div ></span > </div > ');
     }
 
     const pointsRef = firebase.database().ref('points');
